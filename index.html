@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronFit Gym - Transforma tu Cuerpo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0b0b0e;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        /* HEADER / NAVEGACIÓN ESTILO GLASS */
+        header {
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ff3344;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #b0b0c0;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff3344;
+        }
+
+        /* SECCIÓN HERO CON DEGRADADO DINÁMICO */
+        .hero {
+            background: linear-gradient(135deg, rgba(11, 11, 14, 0.9), rgba(11, 11, 14, 0.6)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, #ff3344, #ff8800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 35px;
+            color: #a0a0b0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff3344, #ff6600);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(255, 51, 68, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(255, 51, 68, 0.5);
+        }
+
+        /* SECCIONES GENERALES */
+        section {
+            padding: 100px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        section h2 span {
+            color: #ff3344;
+        }
+
+        /* TARJETAS MODERNAS (ESTILO GLASSMORPHISM) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(25, 25, 35, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            text-align: left;
+            padding-bottom: 25px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 51, 68, 0.4);
+        }
+
+        .card-img-container {
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 25px 25px 0 25px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #9090a0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* TARJETAS DE PLANES DESTACADAS */
+        .plan-card {
+            background: rgba(25, 25, 35, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .plan-card.highlight {
+            background: linear-gradient(180deg, rgba(255, 51, 68, 0.15) 0%, rgba(25, 25, 35, 0.8) 100%);
+            border: 2px solid #ff3344;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .price {
+            font-size: 38px;
+            font-weight: 900;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 16px;
+            color: #9090a0;
+            font-weight: normal;
+        }
+
+        /* BOTÓN FLOTANTE DE WHATSAPP */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            padding: 14px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #060608;
+            text-align: center;
+            padding: 30px;
+            color: #606070;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header>
+        <div class="logo">IronFit <span>Gym</span></div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#clases">Clases</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN DE INICIO -->
+    <section id="inicio" class="hero">
+        <h1>Transforma tu cuerpo, <span>eleva tu mente</span></h1>
+        <p>Entrena con equipos de última generación, rutinas dinámicas y un espacio diseñado para superar tus límites.</p>
+        <a href="#planes" class="btn">Comienza Ahora</a>
+    </section>
+
+    <!-- SECCIÓN DE CLASES -->
+    <section id="clases">
+        <h2>Clases <span>Especializadas</span></h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="CrossFit">
+                </div>
+                <div class="card-content">
+                    <h3>CrossFit & Alta Intensidad</h3>
+                    <p>Mejora tu resistencia, fuerza explosiva y agilidad con entrenamientos dinámicos guiados.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=600&q=80" alt="Musculación">
+                </div>
+                <div class="card-content">
+                    <h3>Musculación Avanzada</h3>
+                    <p>Zona completa de peso libre y maquinaria biomecánica optimizada para hipertrofia y definición.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=600&q=80" alt="Spinning">
+                </div>
+                <div class="card-content">
+                    <h3>Indoor Cycling</h3>
+                    <p>Sesiones intensas de alta quema calórica al ritmo de la mejor música y ambientación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PLANES / PRECIOS -->
+    <section id="planes">
+        <h2>Elige tu <span>Membresía</span></h2>
+        <div class="cards-grid">
+            <div class="plan-card">
+                <h3>Pase Mensual</h3>
+                <div class="price">$500 <span>/ mes</span></div>
+                <p>Acceso total a la zona de pesas, cardio y regaderas en horario libre.</p>
+                <br>
+                <a href="#contacto" class="btn" style="background: transparent; border: 2px solid #ff3344; box-shadow: none;">Seleccionar</a>
+            </div>
+            <div class="plan-card highlight">
+                <h3>Plan Anual Pro</h3>
+                <div class="price">$4,500 <span>/ año</span></div>
+                <p>Acceso ilimitado a todas las áreas, clases especiales y un kit de bienvenida exclusivo.</p>
+                <br>
+                <a href="#contacto" class="btn">¡Lo quiero!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/5214431234567?text=Hola,%20me%20interesa%20inscribirme%20al%20gimnasio" class="whatsapp-float" target="_blank">
+        💬 Contáctanos por WhatsApp
+    </a>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <p>&copy; 2026 IronFit Gym. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
